@@ -1,0 +1,21 @@
+{
+  "name": "website",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild src/app.ts --bundle --outfile=dist/app.js",
+    "build:watch": "esbuild src/app.ts --bundle --outfile=dist/app.js --sourcemap --watch",
+    "build:debug": "esbuild src/app.ts --bundle --outfile=dist/app.js --sourcemap",
+    "copy-html": "cp src/index.html dist/index.html",
+    "serve": "http-server dist -c-1 -p 8080",
+    "start": "pnpm run build && pnpm run copy-html && pnpm run serve"
+  },
+  "dependencies": {
+    "@twilio/voice-sdk": "^2.15.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.18.0",
+    "typescript": "^5.9.2",
+    "http-server": "^14.1.1"
+  }
+}
