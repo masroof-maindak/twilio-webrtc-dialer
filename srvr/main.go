@@ -53,7 +53,7 @@ func tokenHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 // Twilio will hit this handler when the client-side app attempts to make a call
-// It will return a TwiML response that instructs Twilio to dial the numberjs
+// It will return a TwiML response that instructs Twilio to dial the number
 func voiceHandler(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		http.Error(w, "Failed to parse form", http.StatusBadRequest)
@@ -92,7 +92,14 @@ func main() {
 		os.Getenv("TWILIO_API_KEY_SECRET") == "" ||
 		os.Getenv("TWILIO_CALLER_NUMBER") == "" ||
 		os.Getenv("TWILIO_TWIML_APP_SID") == "" {
-		log.Fatal("Please set the appropriate environment variables")
+		log.Println("Please set the appropriate environment variables")
+		log.Fatal(
+			"\n\tTWILIO_ACCOUNT_SID: ", os.Getenv("TWILIO_ACCOUNT_SID"), "\n",
+			"\tTWILIO_API_KEY_SID: ", os.Getenv("TWILIO_API_KEY_SID"), "\n",
+			"\tTWILIO_API_KEY_SECRET: ", os.Getenv("TWILIO_API_KEY_SECRET"), "\n",
+			"\tTWILIO_CALLER_NUMBER: ", os.Getenv("TWILIO_CALLER_NUMBER"), "\n",
+			"\tTWILIO_TWIML_APP_SID: ", os.Getenv("TWILIO_TWIML_APP_SID"), "\n",
+		)
 	}
 
 	http.HandleFunc("/token", tokenHandler)
