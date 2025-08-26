@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/app.ts --bundle --outfile=dist/app.js",
-    "build:watch": "esbuild src/app.ts --bundle --outfile=dist/app.js --sourcemap --watch",
+    "build": "esbuild src/app.ts --bundle --outfile=dist/app.js && pnpm run copy-html",
     "build:debug": "esbuild src/app.ts --bundle --outfile=dist/app.js --sourcemap",
+    "build:watch": "esbuild src/app.ts --bundle --outfile=dist/app.js --sourcemap --watch",
     "copy-html": "cp src/index.html dist/index.html",
     "serve": "http-server dist -c-1 -p 8080",
     "start": "pnpm run build && pnpm run copy-html && pnpm run serve"
